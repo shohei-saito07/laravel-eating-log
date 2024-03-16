@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('users/mypage', 'update')->name('mypage.update');
         Route::get('user/mypage/password/edit', 'edit_password')->name('mypage.edit_password');
         Route::put('user/mypage/password', 'update_password')->name('mypage.update_password');
+        Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
     });
 
     Route::controller(CheckoutController::class)->group(function () {
