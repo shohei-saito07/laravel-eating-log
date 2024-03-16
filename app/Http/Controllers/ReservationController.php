@@ -26,7 +26,7 @@ class ReservationController extends Controller
 
 
         // 予約に紐づく店舗を取得
-        $reservations = Reservation::where('user_id', $user->id);
+        $reservations = Reservation::where('user_id', $user->id)->get();
 
         return view('reservation.index', compact('reservations'));
     }

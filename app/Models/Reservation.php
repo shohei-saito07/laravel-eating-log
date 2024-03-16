@@ -9,6 +9,15 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    /**
+     * キャストする必要のある属性
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function User()
     {
         return $this->belongsTo(User::class);
