@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // ログ出力用
 
 class FavoriteController extends Controller
 {
+    public function index()
+    {
+        $favorite_stores = Auth::user()->favorite_stores()->get();
+        return view('favorite.index', compact('favorite_stores'));
+    }
+
     public function store($store_id)
     {
         Auth::user()->favorite_stores()->attach($store_id);

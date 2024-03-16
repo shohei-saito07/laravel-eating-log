@@ -32,8 +32,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-    Route::post('favorites/{store_id}', [FavoriteController::class, 'store'])->name('favorites.store');
-    Route::delete('favorites/{store_id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+    Route::controller(FavoriteController::class)->group(function () {
+        Route::post('favorites/{store_id}', 'store')->name('favorites.store');
+        Route::delete('favorites/{store_id}', 'destroy')->name('favorites.destroy');
+        Route::get('favorites', 'index')->name('favorites.index');
+    });
 
     Route::controller(UserController::class)->group(function () {
         Route::get('users/mypage', 'mypage')->name('mypage');
