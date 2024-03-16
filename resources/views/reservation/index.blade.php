@@ -33,7 +33,7 @@
                 <h3 class="w-100 mt-4">{{$reservation->number}}</h3>
             </div>
             <div class="col-md-2">
-                <h3 class="w-100 mt-4">{{$reservation->date}}</h3>
+                <h3 class="w-100 mt-4">{{$reservation->date->format('Y年m月d日')}}</h3>
             </div>
             @endforeach
         </div>
