@@ -36,7 +36,7 @@
                         <a class="nav-link" href="{{ route('favorites.index') }}"><i class="far fa-heart"></i></a>
                     </li>
                     <li class="nav-item mr-5">
-                        <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-shopping-cart"></i></a>
+                        <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i></a>
                     </li>
                 @endguest
             </ul>
