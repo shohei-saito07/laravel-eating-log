@@ -25,7 +25,6 @@
                         <a class="nav-link" href="{{ route('login') }}">ログイン</a>
                     </li>
                     <hr>
-                    
                 @else
                     <li class="nav-item mr-5">
                         <a class="nav-link" href="{{ route('mypage') }}">
@@ -37,6 +36,9 @@
                     </li>
                     <li class="nav-item mr-5">
                         <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i></a>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <a class="nav-link" href="{{ route('stores.create') }}"><i class="fas fa-plus"></i></a>
                     </li>
                 @endguest
             </ul>

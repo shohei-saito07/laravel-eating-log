@@ -16,11 +16,6 @@
                     {{$store->description}}
                 </p>
                 <hr>
-                <!-- <p class="d-flex align-items-end">
-                    ￥{{$store->price}}(税込)
-                    
-                </p>
-                <hr> -->
             </div>
             @auth
             <form method="POST" action="{{route('reservation.store')}}"class="m-3 align-items-end">
