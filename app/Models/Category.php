@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
     
-
     public function stores()
     {
         return $this->hasMany(Store::class);
+    }
+
+    public function major_category()
+    {
+        return $this->belongsTo(Major_category::class);
     }
 }

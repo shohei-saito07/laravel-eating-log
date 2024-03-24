@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\Category;
+use App\Models\Major_category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -35,11 +36,11 @@ class StoreController extends Controller
         }
 
         // カテゴリーを取得
+        $major_categories = Major_category::all();
         $categories = Category::all();
-        $major_category_names = Category::pluck('major_category_name')->unique();
 
         // 店舗一覧へ遷移
-        return view('stores.index', compact('stores', 'category', 'categories', 'major_category_names', 'total_count', 'keyword'));
+        return view('stores.index', compact('stores', 'category', 'categories', 'major_categories', 'total_count', 'keyword'));
     }
 
     /**
