@@ -9,6 +9,8 @@ class Major_category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description'];
+
     public function category()
     {
         return $this->hasMany(Category::class);
