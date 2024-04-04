@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('price')->nullable(false);
             $table->string('image')->default('');
             $table->boolean('recommendation_flg')->default('0');
-            $table->timesStamps();
+            $table->timestamps();
         });
     }
 

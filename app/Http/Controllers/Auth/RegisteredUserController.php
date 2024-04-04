@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
             'postal_code' => $request->postal_code,
             'address' => $request->address,
             'phone' => $request->phone,
-            'subscription_flg' => $request->subscription_flg,
+            // 'subscription_flg' => $request->subscription_flg,
             'password' => Hash::make($request->password),
         ]);
 

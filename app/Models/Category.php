@@ -16,6 +16,6 @@ class Category extends Model
 
     public function major_category()
     {
-        return $this->belongsTo(Major_category::class);
+        return $this->belongsTo(MajorCategory::class);
     }
 }

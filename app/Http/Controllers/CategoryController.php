@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Major_category;
+use App\Models\MajorCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // ログ出力用
 
@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         // 親カテゴリ情報を取得
-        $categories = Major_category::all();
+        $categories = MajorCategory::all();
         
         // 親カテゴリ情報を渡して、一覧画面へ遷移
         return view('category.index', compact('categories'));
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // カテゴリ作成画面へ遷移する
-        $store = new Major_category();
+        $store = new MajorCategory();
         $store->name = $request->input('name');
         $store->description = $request->input('description');
         $store->save();
@@ -59,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {        
-        $major_category = Major_category::findOrFail($id);
+        $major_category = MajorCategory::findOrFail($id);
         // 親カテゴリ情報を渡して、カテゴリ編集画面へ遷移
         return view('category.edit', compact('major_category'));
 
@@ -85,7 +85,7 @@ class CategoryController extends Controller
         // Log::error($id);
 
         // 更新するカテゴリを特定
-        $category = Major_category::findOrFail($id);
+        $category = MajorCategory::findOrFail($id);
 
         // カテゴリを更新
         $category->update($validatedData);
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         Log::error($id);
 
         // カテゴリを特定して削除
-        $category = Major_category::findOrFail($id);
+        $category = MajorCategory::findOrFail($id);
         $category->delete();
 
         // 削除が成功した場合の処理

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\Category;
-use App\Models\Major_category;
+use App\Models\MajorCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,7 +36,7 @@ class StoreController extends Controller
         }
 
         // カテゴリーを取得
-        $major_categories = Major_category::all();
+        $major_categories = MajorCategory::all();
         $categories = Category::all();
 
         // 店舗一覧へ遷移
@@ -72,9 +72,14 @@ class StoreController extends Controller
         $store->price = $request->input('price');
         $store->category_id = $request->input('category_id');
         // Log::error($request);
-        // TODO 画像保存先を再設定必要あり
-        $path = $request->file('image')->store('image');
-        // $store->image = $request->input($path);
+        
+        if ($request->file('image') != null)
+        {
+            // TODO 画像保存先を再設定必要あり
+            $path = $request->file('image')->store('image');
+            $store->image = $request->input($path);
+        }
+
         $store->recommendation_flg = $request->has('recommendation_flg') ? 1 : 0;
         $store->save();
 
