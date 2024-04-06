@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
@@ -93,6 +95,11 @@
                     保存
                 </button>
             </form>
+            <form method="GET"  action="{{ route('subscription.create') }}">
+                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
+                    サブスクリプション
+                </button>
+            </form>
             <hr>
             <div class="d-flex justify-content-start">
                 <form method="POST" action="{{ route('mypage.destroy') }}">
@@ -124,4 +131,12 @@
         </div>
     </div>
 </div>
+<!-- @push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripeKey = "{{ env('STRIPE_KEY') }}";
+        console.log(stripe);
+    </script>
+    <script src="{{ asset('/js/stripe.js') }}"></script>
+@endpush -->
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,4 +70,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // カテゴリ
     Route::resource('category', CategoryController::class);
+
+    // サブスクリプション
+    Route::resource('subscription', SubscriptionController::class);
+
+    // サブスクリプションの作成
+    Route::post('/user/subscribe', function (Request $request) {
+        $request->user()->newSubscription(
+            'premium_plan', 'price_1OsixTIXY7oQnFsvy1gLI5HG'
+        )->create($request->paymentMethodId);
+    
+        // ...
+    });
 });
