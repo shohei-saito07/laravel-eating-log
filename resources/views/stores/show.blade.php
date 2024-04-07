@@ -18,6 +18,7 @@
                 <hr>
             </div>
             @auth
+            <!-- 有料会員の表示 -->
             <form method="POST" action="{{route('reservation.store')}}"class="m-3 align-items-end">
                 @csrf
                 <input type="hidden" name="id" value="{{$store->id}}">

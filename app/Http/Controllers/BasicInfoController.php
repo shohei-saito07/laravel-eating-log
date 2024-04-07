@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BasicInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BasicInfoController extends Controller
 {
@@ -13,10 +14,10 @@ class BasicInfoController extends Controller
      * @param  \App\Models\BasicInfo  $basicInfo
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
         // 基本情報を表示
-        $basicInfo = BasicInfo::find($id);
+        $basicInfo = BasicInfo::find(1);
 
         return view('basicInfo.show', compact('basicInfo'));
     }
@@ -27,11 +28,12 @@ class BasicInfoController extends Controller
      * @param  \App\Models\BasicInfo  $basicInfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(BasicInfo $basicInfo)
+    public function edit()
     {
         // 基本情報を編集
-        // $basicInfo = BasicInfo::first();
+        $basicInfo = BasicInfo::find(1);
 
+        Log::error($basicInfo);
         return view('basicInfo.edit', compact('basicInfo'));
     }
 
@@ -45,17 +47,21 @@ class BasicInfoController extends Controller
     public function update(Request $request, BasicInfo $basicInfo)
     {
         // 基本情報を更新
-        // $basicInfo = BasicInfo::first();
-        
         $request->validate([
             'company_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'telephone_number' => 'required|string|max:20',
             'email_address' => 'required|string|email|max:255',
         ]);
-        
+        Log::error($request);
+        $basicInfo->company_name = $request->input('company_name');
+        $basicInfo->address = $request->input('address');
+        $basicInfo->telephone_number = $request->input('telephone_number');
+        $basicInfo->email_address = $request->input('email_address');
+        // $basicInfo->update($request->all());
+        Log::error($basicInfo);
         $basicInfo->update($request->all());
-
+        
         return redirect()->route('basicInfo.show', $basicInfo->id);
     }
 }

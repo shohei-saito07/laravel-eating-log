@@ -38,7 +38,18 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Route::post('/user/subscribe', function (Request $request) {
+            $request->user()->newSubscription(
+                'default', 'price_monthly'
+            )->create($request->paymentMethodId);
+        });
+
+        
+        $intent = Auth::user()->createSetupIntent();
+
+        // サブスクリプション登録画面へ遷移
+        return view('subscription.create', compact('intent'));
     }
 
     /**

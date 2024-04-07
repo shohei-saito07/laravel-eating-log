@@ -27,6 +27,7 @@
     </form>
 
     <script>
+        deubbger;
         var stripe = Stripe('{{ config('services.stripe.key') }}');
 
         var elements = stripe.elements();

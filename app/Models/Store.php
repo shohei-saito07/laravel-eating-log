@@ -29,4 +29,7 @@ class Store extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    // reservations リレーションの件数をカウントする
+    protected $withCount = ['reservations'];
 }

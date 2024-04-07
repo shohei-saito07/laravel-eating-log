@@ -10,6 +10,8 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\BasicInfoController;
+use App\Http\Controllers\SalesManagement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,12 +57,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('users/{user} ', 'show')->name('users.show');
     });
 
-    // TODO 予約チェック作成保留中
-    Route::controller(CheckoutController::class)->group(function () {
-        Route::get('checkout', 'index')->name('checkout.index');
-        Route::post('checkout', 'store')->name('checkout.store');
-        Route::get('checkout/success', 'success')->name('checkout.success');
-    });
+    // // TODO 予約チェック作成保留中
+    // Route::controller(CheckoutController::class)->group(function () {
+    //     Route::get('checkout', 'index')->name('checkout.index');
+    //     Route::post('checkout', 'store')->name('checkout.store');
+    //     Route::get('checkout/success', 'success')->name('checkout.success');
+    // });
 
     // 予約
     Route::controller(ReservationController::class)->group(function () {
@@ -71,15 +73,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // カテゴリ
     Route::resource('category', CategoryController::class);
 
+    
+
+    Route::middleware(['AdminMiddleware'])->group(function(){
+        // アドミン以外見られたくないルート設定
+        // 基本情報
+        // Route::resource('basicInfo', BasicInfoController::class);
+        Route::controller(BasicInfoController::class)->group(function () {
+            Route::get('basicInfo', 'show')->name('basicInfo.show');
+            Route::get('basicInfo/edit', 'edit')->name('basicInfo.edit');
+            Route::put('basicInfo/update', 'update')->name('basicInfo.update');
+        });
+
+        // 売上管理
+        Route::controller(SalesManagement::class)->group(function () {
+            Route::get('salesManagement', 'index')->name('salesManagement.index');
+        });
+    });
+    
+
     // サブスクリプション
     Route::resource('subscription', SubscriptionController::class);
+    // カスタムルートを追加
+    Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe']);
 
     // サブスクリプションの作成
-    Route::post('/user/subscribe', function (Request $request) {
+    Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'], function (Request $request) {
         $request->user()->newSubscription(
             'premium_plan', 'price_1OsixTIXY7oQnFsvy1gLI5HG'
         )->create($request->paymentMethodId);
-    
-        // ...
     });
 });

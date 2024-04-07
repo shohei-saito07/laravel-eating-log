@@ -21,7 +21,7 @@
                </tr>
                <tr>
                     <td colspan="2">
-                        <a href="{{ route('basic_info.edit', $basicInfo) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('basicInfo.edit', $basicInfo) }}" class="btn btn-primary">Edit</a>
                     </td>
                </tr>
           </table>

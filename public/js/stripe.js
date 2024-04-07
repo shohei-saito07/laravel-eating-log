@@ -1,7 +1,10 @@
-const stripe = Stripe(stripeKey);
+debugger;
 
+const stripe = Stripe(stripeKey);
+console.log(stripe);
 const elements = stripe.elements();
 const cardElement = elements.create('card');
+console.log(cardElement);
 cardElement.mount('#card-element');
 
 const cardHolderName = document.getElementById('card-holder-name');

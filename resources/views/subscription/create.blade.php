@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
-@push('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const stripeKey = "{{ env('STRIPE_KEY') }}";
-    </script>
-    <script src="{{ asset('/js/stripe.js') }}"></script>
-@endpush
+
+
 
 @section('content')
     <div class="container nagoyameshi-container pb-5">
@@ -53,9 +48,18 @@
 
                 </form>
                 <div class="d-flex justify-content-center">
-                    <button class="btn text-white shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
+                    <!-- <button class="btn text-white shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button> -->
+                    <button class="" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripeKey = "{{ env('STRIPE_KEY') }}";
+    </script>
+    <script src="{{ asset('/js/stripe.js') }}"></script>
+@endpush
+@stack('scripts')
