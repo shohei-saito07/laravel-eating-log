@@ -21,8 +21,8 @@ class ReservationController extends Controller
         $user = Auth::user();
 
         // ログを出力
-        Log::error($user);
-        Log::error($user->id);
+        // Log::error($user);
+        // Log::error($user->id);
 
 
         // 予約に紐づく店舗を取得

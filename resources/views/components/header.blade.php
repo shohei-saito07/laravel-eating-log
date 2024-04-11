@@ -35,10 +35,7 @@
                     <li class="nav-item mr-5">
                         <a class="nav-link" href="{{ route('favorites.index') }}"><i class="far fa-heart"></i><label>お気に入り</label></a>
                     </li>
-                    
-                    <!-- 管理者の表示 -->
-                    @if (Auth::user()->is_admin)
-                        <li class="nav-item mr-5">
+                    <li class="nav-item mr-5">
                             <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i><label>ユーザ一覧</label></a>
                         </li>
                         <li class="nav-item mr-5">
@@ -52,8 +49,26 @@
                         </li>
                         <li class="nav-item mr-5">
                             <a class="nav-link" href="{{ route('salesManagement.index') }}"><i class="fas fa-plus"></i><label>売上管理</label></a>
+                    </li>
+                    
+                    <!-- 管理者の表示 -->
+                    <!-- @if (Auth::user()->is_admin) -->
+                        <!-- <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i><label>ユーザ一覧</label></a>
                         </li>
-                    @endif
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('stores.create') }}"><i class="fas fa-plus"></i><label>店舗作成</label></a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-plus"></i><label>カテゴリ登録・編集</label></a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('basicInfo.show') }}"><i class="fas fa-plus"></i><label>基本情報</label></a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('salesManagement.index') }}"><i class="fas fa-plus"></i><label>売上管理</label></a>
+                        </li> -->
+                    <!-- @endif -->
                 @endguest
             </ul>
         </div>

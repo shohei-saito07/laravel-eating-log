@@ -71,7 +71,7 @@ class StoreController extends Controller
         $store->description = $request->input('description');
         $store->price = $request->input('price');
         $store->category_id = $request->input('category_id');
-        // Log::error($request);
+        // // Log::error($request);
         
         if ($request->file('image') != null)
         {
@@ -97,7 +97,7 @@ class StoreController extends Controller
         // 店舗に関連するレビューを全件取得する
         $reviews = $store->reviews()->get();
 
-        Log::error($store);    // Log出力
+        // Log::error($store);    // Log出力
 
         // 店舗詳細が画面へ遷移
         return view('stores.show', compact('store', 'reviews'));

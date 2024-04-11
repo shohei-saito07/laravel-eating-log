@@ -31,9 +31,11 @@ require __DIR__.'/auth.php';
 
 //Route::post('/subscribe_process', 'HomeController@subscribe_process');
 
+// 店舗
+Route::resource('stores', StoreController::class);
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    // 店舗
-    Route::resource('stores', StoreController::class);
+    
 
     // レビュー
     Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
@@ -64,6 +66,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //     Route::get('checkout/success', 'success')->name('checkout.success');
     // });
 
+    
+
     // 予約
     Route::controller(ReservationController::class)->group(function () {
         Route::get('reservation', 'index')->name('reservation.index');
@@ -73,34 +77,54 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // カテゴリ
     Route::resource('category', CategoryController::class);
 
+    Route::controller(BasicInfoController::class)->group(function () {
+        Route::get('basicInfo', 'show')->name('basicInfo.show');
+        Route::get('basicInfo/edit/{basicinfo_id}', 'edit')->name('basicInfo.edit');
+        Route::put('basicInfo/update/{basicinfo_id}', 'update')->name('basicInfo.update');
+    });
+
+    // 売上管理
+    Route::controller(SalesManagement::class)->group(function () {
+        Route::get('salesManagement', 'index')->name('salesManagement.index');
+    });
     
 
-    Route::middleware(['AdminMiddleware'])->group(function(){
-        // アドミン以外見られたくないルート設定
-        // 基本情報
-        // Route::resource('basicInfo', BasicInfoController::class);
-        Route::controller(BasicInfoController::class)->group(function () {
-            Route::get('basicInfo', 'show')->name('basicInfo.show');
-            Route::get('basicInfo/edit', 'edit')->name('basicInfo.edit');
-            Route::put('basicInfo/update', 'update')->name('basicInfo.update');
-        });
+    // Route::middleware(['AdminMiddleware'])->group(function(){
+    //     // アドミン以外見られたくないルート設定
+    //     // 基本情報
+    //     // Route::resource('basicInfo', BasicInfoController::class);
+    //     Route::controller(BasicInfoController::class)->group(function () {
+    //         Route::get('basicInfo', 'show')->name('basicInfo.show');
+    //         Route::get('basicInfo/edit', 'edit')->name('basicInfo.edit');
+    //         Route::put('basicInfo/update', 'update')->name('basicInfo.update');
+    //     });
 
-        // 売上管理
-        Route::controller(SalesManagement::class)->group(function () {
-            Route::get('salesManagement', 'index')->name('salesManagement.index');
-        });
-    });
+    //     // 売上管理
+    //     Route::controller(SalesManagement::class)->group(function () {
+    //         Route::get('salesManagement', 'index')->name('salesManagement.index');
+    //     });
+    // });
     
 
     // サブスクリプション
+    Route::get('tempsubscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
     Route::resource('subscription', SubscriptionController::class);
-    // カスタムルートを追加
-    Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe']);
+    
+
+    // Route::resource('subscription', SubscriptionController::class);
+    // Route::get('subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
+    // Route::controller(SubscriptionController::class)->group(function () {
+    //     Route::get('subscription', 'cancel')->name('subscription.cancel');
+        // Route::post('reservation', 'store')->name('reservation.store');
+    // });
 
     // サブスクリプションの作成
-    Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'], function (Request $request) {
-        $request->user()->newSubscription(
-            'premium_plan', 'price_1OsixTIXY7oQnFsvy1gLI5HG'
-        )->create($request->paymentMethodId);
-    });
+    // Route::post('/user/subscribe', function (Request $request) {
+    //     $request->user()->newSubscription(
+    //         'default', 'price_monthly'
+    //     )->create($request->paymentMethodId);
+    
+    //     // マイページにリダイレクト
+    //     return redirect()->route('mypage');
+    // });
 });

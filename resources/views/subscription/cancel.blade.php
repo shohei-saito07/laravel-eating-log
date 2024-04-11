@@ -6,7 +6,7 @@
             <div class="col-xl-5 col-lg-6 col-md-8">
                 <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">ホーム</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('stores.index') }}">ホーム</a></li>
                         <li class="breadcrumb-item active" aria-current="page">有料プラン解約</li>
                     </ol>
                 </nav>
@@ -28,7 +28,7 @@
                     </ul>
                 </div>
 
-                <form id="cardForm" action="{{ route('subscription.destroy') }}" method="post">
+                <form id="cardForm" action="{{ route('subscription.destroy','1') }}" method="post">
                     @csrf
                     @method('delete')
                     <div class="form-group d-flex justify-content-center">

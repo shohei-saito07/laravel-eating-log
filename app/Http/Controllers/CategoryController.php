@@ -81,8 +81,8 @@ class CategoryController extends Controller
         ]);
 
         // ログ出力
-        // Log::error($request);
-        // Log::error($id);
+        // // Log::error($request);
+        // // Log::error($id);
 
         // 更新するカテゴリを特定
         $category = MajorCategory::findOrFail($id);
@@ -104,7 +104,7 @@ class CategoryController extends Controller
     {
 
          // ログ出力
-        Log::error($id);
+        // Log::error($id);
 
         // カテゴリを特定して削除
         $category = MajorCategory::findOrFail($id);

@@ -97,7 +97,12 @@
             </form>
             <form method="GET"  action="{{ route('subscription.create') }}">
                  <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
-                    サブスクリプション
+                    サブスクリプション登録
+                </button>
+            </form>
+            <form method="GET"  action="{{ route('subscription.cancel') }}">
+                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
+                    サブスクリプション解約
                 </button>
             </form>
             <hr>

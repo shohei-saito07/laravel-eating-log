@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionController extends Controller
 {
@@ -38,18 +39,11 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
+        // サブスクリプションの登録
+        $request->user()->newSubscription('default', 'price_1OsixTIXY7oQnFsvy1gLI5HG')->create($request->paymentMethodId);
 
-        Route::post('/user/subscribe', function (Request $request) {
-            $request->user()->newSubscription(
-                'default', 'price_monthly'
-            )->create($request->paymentMethodId);
-        });
-
-        
-        $intent = Auth::user()->createSetupIntent();
-
-        // サブスクリプション登録画面へ遷移
-        return view('subscription.create', compact('intent'));
+        // マイページにリダイレクト
+        return redirect()->route('mypage');
     }
 
     /**
@@ -94,6 +88,15 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->subscription('default')->cancel();
+        return redirect()->route('mypage');
+    }
+
+    public function cancel()
+    {
+        Log::error('cancelの動作確認');
+        // サブスクリプション削除画面へ遷移
+        return view('subscription.cancel');
+        
     }
 }

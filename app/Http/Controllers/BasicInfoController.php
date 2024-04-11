@@ -18,7 +18,7 @@ class BasicInfoController extends Controller
     {
         // 基本情報を表示
         $basicInfo = BasicInfo::find(1);
-
+        Log::error('確認1');
         return view('basicInfo.show', compact('basicInfo'));
     }
 
@@ -33,7 +33,7 @@ class BasicInfoController extends Controller
         // 基本情報を編集
         $basicInfo = BasicInfo::find(1);
 
-        Log::error($basicInfo);
+        // Log::error($basicInfo);
         return view('basicInfo.edit', compact('basicInfo'));
     }
 
@@ -46,6 +46,10 @@ class BasicInfoController extends Controller
      */
     public function update(Request $request, BasicInfo $basicInfo)
     {
+
+        // 基本情報を編集
+        // $basicInfo = BasicInfo::find(1);
+        Log::error($basicInfo);
         // 基本情報を更新
         $request->validate([
             'company_name' => 'required|string|max:255',
@@ -53,14 +57,14 @@ class BasicInfoController extends Controller
             'telephone_number' => 'required|string|max:20',
             'email_address' => 'required|string|email|max:255',
         ]);
-        Log::error($request);
+        // Log::error($request);
         $basicInfo->company_name = $request->input('company_name');
         $basicInfo->address = $request->input('address');
         $basicInfo->telephone_number = $request->input('telephone_number');
         $basicInfo->email_address = $request->input('email_address');
         // $basicInfo->update($request->all());
         Log::error($basicInfo);
-        $basicInfo->update($request->all());
+        $basicInfo->update();
         
         return redirect()->route('basicInfo.show', $basicInfo->id);
     }
