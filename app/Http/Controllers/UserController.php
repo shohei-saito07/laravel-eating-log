@@ -66,7 +66,6 @@ class UserController extends Controller
         $user->postal_code = $request->input('postal_code') ? $request->input('postal_code') : $user->postal_code;
         $user->address = $request->input('address') ? $request->input('address') : $user->address;
         $user->phone = $request->input('phone') ? $request->input('phone') : $user->phone;
-        $user->subscription_flg = $request->input('subscription_flg') ? $request->input('subscription_flg') : $user->phone;
         $user->update();
 
         return to_route('mypage');
