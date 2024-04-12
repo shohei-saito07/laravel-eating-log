@@ -59,19 +59,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('users/{user} ', 'show')->name('users.show');
     });
 
-    // // TODO 予約チェック作成保留中
-    // Route::controller(CheckoutController::class)->group(function () {
-    //     Route::get('checkout', 'index')->name('checkout.index');
-    //     Route::post('checkout', 'store')->name('checkout.store');
-    //     Route::get('checkout/success', 'success')->name('checkout.success');
-    // });
-
-    
-
     // 予約
     Route::controller(ReservationController::class)->group(function () {
         Route::get('reservation', 'index')->name('reservation.index');
         Route::post('reservation', 'store')->name('reservation.store');
+        Route::delete('reservation/{reservation_id}', 'destroy')->name('reservation.destroy');
     });
 
     // カテゴリ
@@ -109,22 +101,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // サブスクリプション
     Route::get('tempsubscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
     Route::resource('subscription', SubscriptionController::class);
-    
-
-    // Route::resource('subscription', SubscriptionController::class);
-    // Route::get('subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
-    // Route::controller(SubscriptionController::class)->group(function () {
-    //     Route::get('subscription', 'cancel')->name('subscription.cancel');
-        // Route::post('reservation', 'store')->name('reservation.store');
-    // });
-
-    // サブスクリプションの作成
-    // Route::post('/user/subscribe', function (Request $request) {
-    //     $request->user()->newSubscription(
-    //         'default', 'price_monthly'
-    //     )->create($request->paymentMethodId);
-    
-    //     // マイページにリダイレクト
-    //     return redirect()->route('mypage');
-    // });
 });

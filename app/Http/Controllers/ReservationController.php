@@ -50,8 +50,6 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         // TODOバリデーションチェックを入れる
-
-
         $userId = Auth::id();
 
         $reservation = new Reservation();
@@ -59,21 +57,15 @@ class ReservationController extends Controller
         $reservation->store_name = $request->input('name');
         $reservation->number = $request->input('number');
         $reservation->date = $request->input('reservation_date');
-        // $reservation->reserved_flg = $request->input('reservation_date'); // この行は意図があっているか確認してください
         $reservation->store_id = $request->input('id');
         $reservation->save();
     
         return redirect()->route('reservation.index');
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    public function destroy($reservation_id)
+    {
+        Reservation::destroy($reservation_id);
+        return redirect()->route('reservation.index');
+    }
 }

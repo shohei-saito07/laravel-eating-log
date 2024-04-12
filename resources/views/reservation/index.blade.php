@@ -8,9 +8,6 @@
         <hr>
 
         <div class="row">
-            <div class="col-md-2 mt-2">
-                <p>イメージ</p>
-            </div>
             <div class="col-md-6 mt-4">
                 <p>店舗名</p>
             </div>
@@ -20,12 +17,9 @@
             <div class="col-md-2">
                 <p>予約日</p>
             </div>
-            @foreach ($reservations as $reservation)
-            <div class="col-md-2 mt-2">
-                <a href="{{route('stores.show', $reservation->store_id)}}">
-                    <img src="{{ asset('img/dummy.png')}}" class="img-fluid w-100">
-                </a>
+            <div class="col-md-2">
             </div>
+            @foreach ($reservations as $reservation)
             <div class="col-md-6 mt-4">
                 <h3 class="mt-4">{{$reservation->store_name}}</h3>
             </div>
@@ -34,6 +28,15 @@
             </div>
             <div class="col-md-2">
                 <h3 class="w-100 mt-4">{{$reservation->date->format('Y年m月d日')}}</h3>
+            </div>
+            <div class="col-md-2">
+                <form action="{{ route('reservation.destroy', $reservation->id) }}" method="POST" class="row g-1">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col-auto">
+                        <button type="submit" class="btn samuraimart-header-search-button">削除</button>
+                    </div>
+                </form>
             </div>
             @endforeach
         </div>
