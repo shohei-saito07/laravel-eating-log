@@ -29,7 +29,7 @@ class ReviewController extends Controller
         $review->title = $request->input('title');
         $review->content = $request->input('content');
         $review->store_id = $request->input('store_id');
-        $review->evaluation = $request->input('evaluation'); // おすすめの設定を削除予定
+        $review->evaluation = $request->input('evaluation',0); // おすすめの設定を削除予定
         $review->user_id = Auth::user()->id;
         $review->save();
 
