@@ -9,8 +9,9 @@
                 <input class="form-control samuraimart-header-search-input" name="keyword">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn samuraimart-header-search-button"><i
-                        class="fas fa-search samuraimart-header-search-icon"></i>検索</button>
+                <button type="submit" class="btn samuraimart-header-search-button">
+                    <i class="fas fa-search samuraimart-header-search-icon"></i>検索
+                </button>
             </div>
         </form>
 

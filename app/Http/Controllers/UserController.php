@@ -15,7 +15,7 @@ class UserController extends Controller
         // キーワードで絞り込み判定
         if ($keyword !== null)
         {
-            $users = User::where('name', 'like', "%{$keyword}%")->get();
+            $users = User::where('email', 'like', "%{$keyword}%")->get();
         }
         else 
         {
