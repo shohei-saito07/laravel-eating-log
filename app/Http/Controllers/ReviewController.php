@@ -35,4 +35,26 @@ class ReviewController extends Controller
 
         return back();
     }
+
+    public function edit(Review $review)
+    {
+        Log::error('This is an error message.');
+        return view('reviews.edit', compact('review'));
+    }
+
+    public function destroy($reviews_id)
+    {
+        Review::destroy($reviews_id);
+        return back();
+    }
+
+    public function update(Request $request, Review $Review)
+    {
+        // 店舗情報を更新し、一覧画面へ遷移
+        $Review->title = $request->input('title');
+        $Review->content = $request->input('content');
+        $Review->update();
+
+        return to_route('stores.show', $Review->store_id);
+    }
 }

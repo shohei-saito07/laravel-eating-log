@@ -32,7 +32,8 @@
                         <div class="col-12">
                             <p class="samuraimart-store-label mt-2">
                                 {{$store->name}}<br>
-                                <label>￥{{$store->price}}</label>
+                                <label>￥{{$store->price}}</label><br>
+                                <a href="{{ route('stores.edit', $store->id) }}">Edit</a>
                             </p>
                         </div>
                     </div>

@@ -59,6 +59,7 @@
                     </div>
                 </div>
             </form>
+            
             <form id="favorites-destroy-form" action="{{ route('favorites.destroy', $store->id) }}" method="POST" class="d-none">
                 @csrf
                 @method('DELETE')
@@ -78,22 +79,22 @@
             <div class="row">
                 @foreach($reviews as $review)
                 <div class="offset-md-5 col-md-5">
-                    <p calss="h3">{{$review->title}}</p>
-                    <p class="h3">{{$review->content}}</p>
-                    <!-- レビュー編集用 -->
-                    <form action="{{ route('stores.update',$store->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="text" name="name" id="store-name" class="form-control" value="{{ $review->title }}">
-                        <input type="text" name="name" id="store-name" class="form-control" value="{{ $review->content }}">
-                    </form>
-
+                    <p class="h3 review-title">{{$review->title}}</p>
+                    <p class="h3 review-content">{{$review->content}}</p>
+                   
                     <label>{{$review->created_at}} {{$review->user->name}}</label>
-
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">削除</button>
-                    </form>
+                    @if(Auth::user()->id == $review->user_id)
+                        <!-- 編集ボタン -->
+                        <form id="review-edit-form" action="{{ route('reviews.edit',$review) }}" method="GET">
+                            <button id="review-edit" class="btn btn-primary edit-btn">編集</button>
+                        </form>
+                        <!-- 削除ボタン -->
+                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">削除</button>
+                        </form>
+                    @endif
                 </div>
                 @endforeach
             </div><br />

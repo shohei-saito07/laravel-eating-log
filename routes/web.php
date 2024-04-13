@@ -36,10 +36,14 @@ Route::resource('stores', StoreController::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     
-
     // レビュー
-    Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
-
+    Route::controller(ReviewController::class)->group(function () {
+        Route::post('reviews',  'store')->name('reviews.store');
+        Route::delete('reviews/destroy/{reviews_id}', 'destroy')->name('reviews.destroy');
+        Route::get('reviews/edit/{review}', 'edit')->name('reviews.edit');
+        Route::put('reviews/update/{review}', 'update')->name('reviews.update');
+    });
+    
     // お気に入り
     Route::controller(FavoriteController::class)->group(function () {
         Route::post('favorites/{store_id}', 'store')->name('favorites.store');
