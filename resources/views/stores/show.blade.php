@@ -80,7 +80,20 @@
                 <div class="offset-md-5 col-md-5">
                     <p calss="h3">{{$review->title}}</p>
                     <p class="h3">{{$review->content}}</p>
+                    <!-- レビュー編集用 -->
+                    <form action="{{ route('stores.update',$store->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="text" name="name" id="store-name" class="form-control" value="{{ $review->title }}">
+                        <input type="text" name="name" id="store-name" class="form-control" value="{{ $review->content }}">
+                    </form>
+
                     <label>{{$review->created_at}} {{$review->user->name}}</label>
+
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">削除</button>
+                    </form>
                 </div>
                 @endforeach
             </div><br />

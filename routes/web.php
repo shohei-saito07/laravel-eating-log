@@ -69,6 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // カテゴリ
     Route::resource('category', CategoryController::class);
 
+    // 基本情報
     Route::controller(BasicInfoController::class)->group(function () {
         Route::get('basicInfo', 'show')->name('basicInfo.show');
         Route::get('basicInfo/edit/{basicinfo_id}', 'edit')->name('basicInfo.edit');
