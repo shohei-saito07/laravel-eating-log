@@ -14,11 +14,21 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // 親カテゴリ情報を取得
-        $categories = MajorCategory::all();
-        
+        $keyword = $request->keyword;
+
+        // キーワードで絞り込み判定
+        if ($keyword !== null)
+        {
+            $categories = MajorCategory::where('name', 'like', "%{$keyword}%")->get();
+        }
+        else 
+        {
+            // 親カテゴリ情報を取得
+            $categories = MajorCategory::all();
+        }
+
         // 親カテゴリ情報を渡して、一覧画面へ遷移
         return view('category.index', compact('categories'));
     }
@@ -80,10 +90,6 @@ class CategoryController extends Controller
             'description' => 'nullable|string|max:255',
         ]);
 
-        // ログ出力
-        // // Log::error($request);
-        // // Log::error($id);
-
         // 更新するカテゴリを特定
         $category = MajorCategory::findOrFail($id);
 
@@ -102,10 +108,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-
-         // ログ出力
-        // Log::error($id);
-
         // カテゴリを特定して削除
         $category = MajorCategory::findOrFail($id);
         $category->delete();
