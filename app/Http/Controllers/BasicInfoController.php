@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BasicInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class BasicInfoController extends Controller
 {
@@ -43,8 +42,9 @@ class BasicInfoController extends Controller
      * @param  \App\Models\BasicInfo  $basicInfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BasicInfo $basicInfo)
+    public function update(Request $request)
     {
+        $basicInfo = BasicInfo::find(1);
 
         // 基本情報を更新
         $request->validate([
@@ -53,6 +53,7 @@ class BasicInfoController extends Controller
             'telephone_number' => 'required|string|max:20',
             'email_address' => 'required|string|email|max:255',
         ]);
+
         $basicInfo->company_name = $request->input('company_name');
         $basicInfo->address = $request->input('address');
         $basicInfo->telephone_number = $request->input('telephone_number');

@@ -24,22 +24,24 @@
                 <input type="hidden" name="id" value="{{$store->id}}">
                 <input type="hidden" name="name" value="{{$store->name}}">
                 <input type="hidden" name="price" value="{{$store->price}}">
-                <div class="form-group row">
-                    <label for="quantity" class="col-sm-2 col-form-label">人数</label>
-                    <div class="col-sm-10">
-                        <input type="number" id="quantity" name="number" min="1" value="1" class="form-control w-25">
+                <div class="row">
+                    <div class="form-group row">
+                        <label for="quantity" class="col-sm-2 col-form-label">人数</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="quantity" name="number" min="1" value="1" class="form-control w-25">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reservation_date" class="col-sm-2 col-form-label">予約日時</label>
-                    <div class="col-sm-10">
-                        <input type="date" id="reservation_date" name="reservation_date" class="form-control w-25">
+                    <div class="form-group row">
+                        <label for="reservation_date" class="col-sm-2 col-form-label">予約日時</label>
+                        <div class="col-sm-10">
+                            <input type="date" id="reservation_date" name="reservation_date" class="form-control w-25">
+                        </div>
                     </div>
                 </div>
                 <input type="hidden" name="weight" value="0">
                 <div class="row">
                     <div class="col-7">
-                        <button type="submit" class="btn eating-log-submit-button w-50">
+                        <button type="submit" class="btn eating-log-submit-button w-75">
                             <i class="fas fa-shopping-cart"></i>
                             予約
                         </button>
@@ -85,11 +87,11 @@
                     <label>{{$review->created_at}} {{$review->user->name}}</label>
                     @if(Auth::user() !== null AND Auth::user()->id == $review->user_id)
                         <!-- 編集ボタン -->
-                        <form id="review-edit-form" action="{{ route('reviews.edit',$review) }}" method="GET">
+                        <form id="review-edit-form" action="{{ route('reviews.edit',$review) }}" method="GET" class="d-inline">
                             <button id="review-edit" class="btn btn-primary edit-btn">編集</button>
                         </form>
                         <!-- 削除ボタン -->
-                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">削除</button>

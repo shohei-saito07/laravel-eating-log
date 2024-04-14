@@ -62,9 +62,9 @@
                 </div>
 
 
-                    <div class="alert alert-danger nagoyameshi-card-error" id="card-error" role="alert">
-                        <ul class="mb-0" id="error-list"></ul>
-                    </div>
+                <div class="alert alert-danger nagoyameshi-card-error" id="card-error" role="alert">
+                    <ul class="mb-0" id="error-list"></ul>
+                </div>
 
 
                 <form id="card-form" action="{{ route('subscription.update') }}" method="post">
@@ -74,7 +74,7 @@
                     <div class="nagoyameshi-card-element mb-4" id="card-element"></div>
                 </form>
                 <div class="d-flex justify-content-center">
-                    <button class="  shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
+                    <button class="btn btn-success shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
                 </div>
             </div>
         </div>

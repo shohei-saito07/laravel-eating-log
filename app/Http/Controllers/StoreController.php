@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\MajorCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class StoreController extends Controller
 {
@@ -66,6 +65,13 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255'
+        ]);
+
         // 店舗情報の保存
         $store = new Store();
         $store->name = $request->input('name');
@@ -75,7 +81,6 @@ class StoreController extends Controller
 
         if ($request->file('image') != null)
         {
-            // TODO 画像保存先を再設定必要あり
             $path = $request->file('image')->store('image');
             $store->image = $request->input($path);
         }
@@ -125,6 +130,13 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255'
+        ]);
+
         // 店舗情報を更新し、一覧画面へ遷移
         $store->name = $request->input('name');
         $store->description = $request->input('description');

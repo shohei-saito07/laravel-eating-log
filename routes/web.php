@@ -86,9 +86,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // サブスクリプション
     Route::controller(SubscriptionController::class)->group(function () {
         Route::get('tempsubscription/create', 'create')->name('subscription.create');
+        Route::post('tempsubscription/store', 'store')->name('subscription.store');
         Route::get('tempsubscription/cancel', 'cancel')->name('subscription.cancel');
         Route::get('tempsubscription/edit', 'edit')->name('subscription.edit');
         Route::patch('tempsubscription/update', 'update')->name('subscription.update');
+        Route::delete('tempsubscription/delete', 'destroy')->name('subscription.destroy');
     });
     // Route::resource('subscription', SubscriptionController::class);
 });

@@ -4,7 +4,6 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const stripeKey = "{{ env('STRIPE_KEY') }}";
-        console.log(stripe);
     </script>
     <script src="{{ asset('/js/stripe.js') }}"></script>
 @endpush
@@ -21,7 +20,7 @@
             <h1 class="mt-3 mb-3">会員情報の編集</h1>
             <hr>
 
-            <form method="POST" action="{{ route('mypage') }}">
+            <form id="user-form" method="POST" action="{{ route('mypage') }}">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
@@ -53,7 +52,6 @@
                     </div>
                 </div>
                 <br>
-
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <label for="postal_code" class="text-md-left samuraimart-edit-user-info-label">郵便番号</label>
@@ -97,33 +95,52 @@
                         @enderror
                     </div>
                 </div>
+            </form>
+            <br>
+            <div class="form-group">
+                <div class="d-flex justify-content-between">
+                    <label for="subsc-statu" class="text-md-left samuraimart-edit-user-info-label">スタータス</label>
+                </div>
+                <div class="collapse show subsc-statu">
+                    @if($user->subscription('default')->recurring())
+                        有料会員
+                    @else
+                        無料会員
+                    @endif
+                </div>
+            </div>
+            
+            @if($user->subscription('default')->recurring())
+            <div class="d-flex justify-content-between">
+                <form method="GET" action="{{ route('subscription.cancel') }}" class="w-50">
+                    <button type="submit" class="btn btn-danger samuraimart-submit-button mt-3">
+                        サブスクリプション解約
+                    </button>
+                </form>
+                <form method="GET" action="{{ route('subscription.edit') }}" class="w-50">
+                    <button type="submit" class="btn btn-primary samuraimart-submit-button mt-3">
+                        クレジットカード編集
+                    </button>
+                </form>
+            </div>
+            @else
+                <form method="GET"  action="{{ route('subscription.create') }}">
+                    <button type="submit" class="btn btn-primary mt-3 w-50">
+                        サブスクリプション登録
+                    </button>
+                </form>
+            @endif
 
-                <hr>
-                <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
-                    保存
-                </button>
-            </form>
-            <form method="GET"  action="{{ route('subscription.create') }}">
-                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
-                    サブスクリプション登録
-                </button>
-            </form>
-            <form method="GET"  action="{{ route('subscription.cancel') }}">
-                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
-                    サブスクリプション解約
-                </button>
-            </form>
-            <form method="GET"  action="{{ route('subscription.edit', '1') }}">
-                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
-                    登録クレジットカード編集
-                </button>
-            </form>
             <hr>
+            <button type="submit" class="btn btn-success w-100" onclick="event.preventDefault(); document.getElementById('user-form').submit();">
+                保存
+            </button>
+
             <div class="d-flex justify-content-start">
                 <form method="POST" action="{{ route('mypage.destroy') }}">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
-                    <div class="btn dashboard-delete-link" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">退会する</div>
+                    <div class="btn dashboard-delete-link btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">退会する</div>
 
                     <div class="modal fade" id="delete-user-confirm-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">

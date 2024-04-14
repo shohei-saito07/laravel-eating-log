@@ -6,10 +6,16 @@
 
     <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @error('name')
+            <strong>カテゴリを入力してください</strong>
+        @enderror
         <div class="form-group">
             <label for="store-name">カテゴリ</label>
             <input type="text" name="name" id="store-name" class="form-control" required>
         </div>
+        @error('description')
+            <strong>詳細を入力してください</strong>
+        @enderror
         <div class="form-group">
             <label for="store-description">詳細</label>
             <textarea name="description" id="store-description" class="form-control"></textarea>

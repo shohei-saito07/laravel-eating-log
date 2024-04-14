@@ -28,11 +28,11 @@
                     </ul>
                 </div>
 
-                <form id="cardForm" action="{{ route('subscription.destroy','1') }}" method="post">
+                <form id="cardForm" action="{{ route('subscription.destroy') }}" method="post">
                     @csrf
                     @method('delete')
                     <div class="form-group d-flex justify-content-center">
-                        <button class="btn text-white shadow-sm w-50 nagoyameshi-btn-danger">解約</button>
+                        <button class="shadow-sm w-50 nagoyameshi-btn-danger">解約</button>
                     </div>
                 </form>
             </div>

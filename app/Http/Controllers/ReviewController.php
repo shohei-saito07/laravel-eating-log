@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-// 値のログ確認のため追加
-use Illuminate\Support\Facades\Log; 
-
 
 class ReviewController extends Controller
 {
@@ -49,6 +46,12 @@ class ReviewController extends Controller
 
     public function update(Request $request, Review $Review)
     {
+        // 必須チェック
+        $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required'
+        ]);
+
         // 店舗情報を更新し、一覧画面へ遷移
         $Review->title = $request->input('title');
         $Review->content = $request->input('content');

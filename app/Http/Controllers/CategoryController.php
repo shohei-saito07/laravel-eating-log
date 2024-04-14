@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\MajorCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log; // ログ出力用
 
 class CategoryController extends Controller
 {
@@ -52,12 +51,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // カテゴリ作成画面へ遷移する
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
         $store = new MajorCategory();
         $store->name = $request->input('name');
         $store->description = $request->input('description');
         $store->save();
 
+        // カテゴリ作成画面へ遷移する
         return to_route('stores.index');
     }
 
@@ -84,6 +88,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
         // リクエストされたデータのバリデーション
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',

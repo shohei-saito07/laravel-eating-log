@@ -4,20 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,17 +36,6 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -70,6 +48,7 @@ class SubscriptionController extends Controller
 
         // クレジットカード情報
         $intent = Auth::user()->createSetupIntent();
+        Log::error($intent);
 
         // クレジットカード編集画面へ遷移
         return view('subscription.edit', compact('user','intent'));
@@ -84,20 +63,17 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request)
     {
-        // 支払いのデフォルト取得
+        // 既存の支払いのデフォルト取得
         $paymentMethod = Auth::user()->defaultPaymentMethod();
 
         // 既存の支払い方法を削除
         $paymentMethod->delete();
 
-        // サブスクリプションの新規登録
-        // $request->user()->newSubscription('default', 'price_1OsixTIXY7oQnFsvy1gLI5HG')->create($request->paymentMethodId);
-        $payment = $request->user()->pay($request->get('amount') );
-        $payment->client_secret;
-
+        // デフォルトの支払いを変更
+        Auth::user()->updateDefaultPaymentMethod($request->paymentMethodId);
+ 
         // マイページにリダイレクト
         return redirect()->route('mypage');
-        
     }
 
     /**
@@ -106,7 +82,7 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         Auth::user()->subscription('default')->cancel();
         return redirect()->route('mypage');
@@ -114,7 +90,6 @@ class SubscriptionController extends Controller
 
     public function cancel()
     {
-
         // サブスクリプション削除画面へ遷移
         return view('subscription.cancel');
         

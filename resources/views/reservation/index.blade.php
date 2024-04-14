@@ -34,7 +34,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="col-auto">
-                        <button type="submit" class="btn samuraimart-header-search-button">削除</button>
+                        <button type="submit" class="btn samuraimart-header-search-button">キャンセル</button>
                     </div>
                 </form>
             </div>
