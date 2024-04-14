@@ -30,35 +30,6 @@ class CheckoutController extends Controller
 
         // 支払いが成功した場合の処理
         return redirect()->back()->with('success', 'Payment successful!');
-
-        // // Stripe APIを使用して支払い方法を追加（テスト用のクレジットカード番号を使用）
-        // $paymentMethod = PaymentMethod::create([
-        //     'type' => 'card',
-        //     'card' => [
-        //         'number' => '4242424242424242', // テスト用のVisaカード番号
-        //         'exp_month' => '12', // 有効期限の月
-        //         'exp_year' => '25', // 有効期限の年
-        //         'cvc' => '123', // セキュリティコード
-        //     ],
-        // ]);
-
-        // // テスト用の支払い方法を顧客に関連付ける
-        // $customer = Customer::retrieve("cus_Pi94bhvUEWAqx1");
-        // $customer->invoice_settings = [
-        //     'default_payment_method' => $paymentMethod->id,
-        // ];
-        // $customer->save();
-
-        // // Stripe APIを使用してサブスクリプションを作成
-        // $subscription = Subscription::create([
-        //     'customer' => "cus_Pi94bhvUEWAqx1",
-        //     'items' => [
-        //         ['price' => 'price_1OsixTIXY7oQnFsvy1gLI5HG'], // 価格IDを適切なものに置き換える
-        //     ],
-        // ]);
-
-        return back();
-        //return view('checkout.index');
     }
 
     public function store(Request $request)

@@ -83,7 +83,7 @@
                     <p class="h3 review-content">{{$review->content}}</p>
                    
                     <label>{{$review->created_at}} {{$review->user->name}}</label>
-                    @if(Auth::user()->id == $review->user_id)
+                    @if(Auth::user() !== null AND Auth::user()->id == $review->user_id)
                         <!-- 編集ボタン -->
                         <form id="review-edit-form" action="{{ route('reviews.edit',$review) }}" method="GET">
                             <button id="review-edit" class="btn btn-primary edit-btn">編集</button>
