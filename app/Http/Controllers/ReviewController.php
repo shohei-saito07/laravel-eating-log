@@ -24,7 +24,7 @@ class ReviewController extends Controller
             'title' => 'required|max:20',
             'content' => 'required'
         ]);
-        Log::info($request);
+
         $review = new Review();
         $review->title = $request->input('title');
         $review->content = $request->input('content');
@@ -38,8 +38,7 @@ class ReviewController extends Controller
 
     public function edit(Review $review)
     {
-        Log::error('This is an error message.');
-        return view('reviews.edit', compact('review'));
+         return view('reviews.edit', compact('review'));
     }
 
     public function destroy($reviews_id)
