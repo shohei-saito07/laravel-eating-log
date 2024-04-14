@@ -54,7 +54,6 @@
                 </form>
                 <div class="d-flex justify-content-center">
                     <button class="" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
-                    <!-- <button class="" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button> -->
                 </div>
             </div>
         </div>

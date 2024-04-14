@@ -84,6 +84,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // サブスクリプション
-    Route::get('tempsubscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
-    Route::resource('subscription', SubscriptionController::class);
+    Route::controller(SubscriptionController::class)->group(function () {
+        Route::get('tempsubscription/create', 'create')->name('subscription.create');
+        Route::get('tempsubscription/cancel', 'cancel')->name('subscription.cancel');
+        Route::get('tempsubscription/edit', 'edit')->name('subscription.edit');
+        Route::patch('tempsubscription/update', 'update')->name('subscription.update');
+    });
+    // Route::resource('subscription', SubscriptionController::class);
 });

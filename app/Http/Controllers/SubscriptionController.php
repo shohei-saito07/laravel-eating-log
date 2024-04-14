@@ -63,9 +63,16 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        // ユーザ情報
+        $user = Auth::user();
+
+        // クレジットカード情報
+        $intent = Auth::user()->createSetupIntent();
+
+        // クレジットカード編集画面へ遷移
+        return view('subscription.edit', compact('user','intent'));
     }
 
     /**
@@ -75,9 +82,22 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // 支払いのデフォルト取得
+        $paymentMethod = Auth::user()->defaultPaymentMethod();
+
+        // 既存の支払い方法を削除
+        $paymentMethod->delete();
+
+        // サブスクリプションの新規登録
+        // $request->user()->newSubscription('default', 'price_1OsixTIXY7oQnFsvy1gLI5HG')->create($request->paymentMethodId);
+        $payment = $request->user()->pay($request->get('amount') );
+        $payment->client_secret;
+
+        // マイページにリダイレクト
+        return redirect()->route('mypage');
+        
     }
 
     /**
@@ -94,7 +114,7 @@ class SubscriptionController extends Controller
 
     public function cancel()
     {
-        Log::error('cancelの動作確認');
+
         // サブスクリプション削除画面へ遷移
         return view('subscription.cancel');
         

@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
-@section('content')
+@push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripeKey = "{{ env('STRIPE_KEY') }}";
+        console.log(stripe);
+    </script>
+    <script src="{{ asset('/js/stripe.js') }}"></script>
+@endpush
 
+@section('content')
 
 <div class="container">
     <div class="row justify-content-center">
@@ -105,6 +113,11 @@
                     サブスクリプション解約
                 </button>
             </form>
+            <form method="GET"  action="{{ route('subscription.edit', '1') }}">
+                 <button type="submit" class="btn samuraimart-submit-button mt-3 w-25">
+                    登録クレジットカード編集
+                </button>
+            </form>
             <hr>
             <div class="d-flex justify-content-start">
                 <form method="POST" action="{{ route('mypage.destroy') }}">
@@ -136,12 +149,7 @@
         </div>
     </div>
 </div>
-<!-- @push('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const stripeKey = "{{ env('STRIPE_KEY') }}";
-        console.log(stripe);
-    </script>
-    <script src="{{ asset('/js/stripe.js') }}"></script>
-@endpush -->
+
+@stack('scripts')
+
 @endsection

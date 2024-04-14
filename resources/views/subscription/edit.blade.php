@@ -14,7 +14,7 @@
             <div class="col-xl-5 col-lg-6 col-md-8">
                 <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">ホーム</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('mypage') }}">ホーム</a></li>
                         <li class="breadcrumb-item active" aria-current="page">お支払い方法</li>
                     </ol>
                 </nav>
@@ -28,7 +28,11 @@
                         </div>
 
                         <div class="col">
-                            <span>{{ $user->pm_type }}</span>
+                            <span>
+                                @if($user->pm_type !== null)
+                                    {{ $user->pm_type }}
+                                @endif
+                            </span>
                         </div>
                     </div>
 
@@ -38,7 +42,11 @@
                         </div>
 
                         <div class="col">
-                            <span>{{ $user->defaultPaymentMethod()->billing_details->name  }}</span>
+                            <span>
+                                @if($user->defaultPaymentMethod() && $user->defaultPaymentMethod()->billing_details && $user->defaultPaymentMethod()->billing_details->name)
+                                    {{ $user->defaultPaymentMethod()->billing_details->name }}
+                                @endif
+                            </span>
                         </div>
                     </div>
 
@@ -53,9 +61,11 @@
                     </div>
                 </div>
 
-                <div class="alert alert-danger nagoyameshi-card-error" id="card-error" role="alert">
-                    <ul class="mb-0" id="error-list"></ul>
-                </div>
+
+                    <div class="alert alert-danger nagoyameshi-card-error" id="card-error" role="alert">
+                        <ul class="mb-0" id="error-list"></ul>
+                    </div>
+
 
                 <form id="card-form" action="{{ route('subscription.update') }}" method="post">
                     @csrf
@@ -64,9 +74,10 @@
                     <div class="nagoyameshi-card-element mb-4" id="card-element"></div>
                 </form>
                 <div class="d-flex justify-content-center">
-                    <button class="btn text-white shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
+                    <button class="  shadow-sm w-50 nagoyameshi-btn" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
                 </div>
             </div>
         </div>
     </div>
+    @stack('scripts')
 @endsection
