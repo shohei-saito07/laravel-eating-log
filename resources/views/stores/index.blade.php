@@ -33,7 +33,9 @@
                             <p class="samuraimart-store-label mt-2">
                                 {{$store->name}}<br>
                                 <label>￥{{$store->price}}</label><br>
-                                <a href="{{ route('stores.edit', $store->id) }}">Edit</a>
+                                @if (Auth::user() !== null AND Auth::user()->is_admin)
+                                    <a href="{{ route('stores.edit', $store->id) }}">編集</a>
+                                @endif
                             </p>
                         </div>
                     </div>

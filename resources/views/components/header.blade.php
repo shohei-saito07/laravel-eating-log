@@ -26,34 +26,9 @@
                     </li>
                     <hr>
                 @else
-                    <li class="nav-item mr-5">
-                        <a class="nav-link" href="{{ route('mypage') }}">
-                            <i class="fas fa-user mr-1"></i><label>マイページ</label>
-                        </a>
-                    </li>
-                    <!-- 有料会員の表示 -->
-                    <li class="nav-item mr-5">
-                        <a class="nav-link" href="{{ route('favorites.index') }}"><i class="far fa-heart"></i><label>お気に入り</label></a>
-                    </li>
-                    <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i><label>ユーザ一覧</label></a>
-                        </li>
-                        <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('stores.create') }}"><i class="fas fa-plus"></i><label>店舗作成</label></a>
-                        </li>
-                        <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-plus"></i><label>カテゴリ登録・編集</label></a>
-                        </li>
-                        <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('basicInfo.show') }}"><i class="fas fa-plus"></i><label>基本情報</label></a>
-                        </li>
-                        <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('salesManagement.index') }}"><i class="fas fa-plus"></i><label>売上管理</label></a>
-                    </li>
-                    
                     <!-- 管理者の表示 -->
-                    <!-- @if (Auth::user()->is_admin) -->
-                        <!-- <li class="nav-item mr-5">
+                    @if (Auth::user() !== null AND Auth::user()->is_admin)
+                        <li class="nav-item mr-5">
                             <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i><label>ユーザ一覧</label></a>
                         </li>
                         <li class="nav-item mr-5">
@@ -67,8 +42,26 @@
                         </li>
                         <li class="nav-item mr-5">
                             <a class="nav-link" href="{{ route('salesManagement.index') }}"><i class="fas fa-plus"></i><label>売上管理</label></a>
-                        </li> -->
-                    <!-- @endif -->
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-plus"></i><label>ログアウト</label></a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                        </form>
+                    @else
+                        <li class="nav-item mr-5">
+                            <a class="nav-link" href="{{ route('mypage') }}">
+                                <i class="fas fa-user mr-1"></i><label>マイページ</label>
+                            </a>
+                        </li>
+                        <!-- 有料会員の表示 -->
+                        @if (Auth::user() !== null AND Auth::user()->subscribed('default'))
+                            <li class="nav-item mr-5">
+                                <a class="nav-link" href="{{ route('favorites.index') }}"><i class="far fa-heart"></i><label>お気に入り</label></a>
+                            </li>
+                        @endif
+                    @endif
                 @endguest
             </ul>
         </div>

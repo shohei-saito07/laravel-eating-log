@@ -6,6 +6,7 @@ use App\Models\Store;
 use App\Models\Category;
 use App\Models\MajorCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class StoreController extends Controller
@@ -71,8 +72,7 @@ class StoreController extends Controller
         $store->description = $request->input('description');
         $store->price = $request->input('price');
         $store->category_id = $request->input('category_id');
-        // // Log::error($request);
-        
+
         if ($request->file('image') != null)
         {
             // TODO 画像保存先を再設定必要あり
@@ -96,8 +96,6 @@ class StoreController extends Controller
     {
         // 店舗に関連するレビューを全件取得する
         $reviews = $store->reviews()->get();
-
-        // Log::error($store);    // Log出力
 
         // 店舗詳細が画面へ遷移
         return view('stores.show', compact('store', 'reviews'));

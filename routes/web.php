@@ -29,8 +29,6 @@ Route::get('/',  [WebController::class, 'index'])->name('top');
 
 require __DIR__.'/auth.php';
 
-//Route::post('/subscribe_process', 'HomeController@subscribe_process');
-
 // 店舗
 Route::resource('stores', StoreController::class);
 
@@ -84,24 +82,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(SalesManagement::class)->group(function () {
         Route::get('salesManagement', 'index')->name('salesManagement.index');
     });
-    
-
-    // Route::middleware(['AdminMiddleware'])->group(function(){
-    //     // アドミン以外見られたくないルート設定
-    //     // 基本情報
-    //     // Route::resource('basicInfo', BasicInfoController::class);
-    //     Route::controller(BasicInfoController::class)->group(function () {
-    //         Route::get('basicInfo', 'show')->name('basicInfo.show');
-    //         Route::get('basicInfo/edit', 'edit')->name('basicInfo.edit');
-    //         Route::put('basicInfo/update', 'update')->name('basicInfo.update');
-    //     });
-
-    //     // 売上管理
-    //     Route::controller(SalesManagement::class)->group(function () {
-    //         Route::get('salesManagement', 'index')->name('salesManagement.index');
-    //     });
-    // });
-    
 
     // サブスクリプション
     Route::get('tempsubscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
