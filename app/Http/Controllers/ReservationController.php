@@ -26,16 +26,6 @@ class ReservationController extends Controller
     }
 
     /**
-      * Show the form for creating a new resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
-      public function create()
-      {
-          //
-      }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,7 +33,13 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        // TODOバリデーションチェックを入れる
+        // バリデーションチェック
+        $request->validate([
+            'number' => 'required|int|max:30',
+            'reservation_date' => 'required',
+        ]);
+
+
         $userId = Auth::id();
 
         $reservation = new Reservation();
