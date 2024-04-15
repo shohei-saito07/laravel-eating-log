@@ -31,7 +31,6 @@
         <h1>新着店舗</h1>
         <div class="row">
         @foreach($new_stores as $new_store)
-            @if($store->recommendation_flg == 1)
                 <div class="col-3">
                     <a href="{{route('stores.show', $new_store)}}">
                         <img src="{{ asset('img/dummy.png')}}" class="img-thumbnail">
@@ -45,7 +44,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
         @endforeach
         </div>
      </div>
