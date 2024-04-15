@@ -7,109 +7,47 @@
          @endcomponent
      </div>
      <div class="col-9">
-         <h1>おすすめ店舗</h1>
-         <div class="row">
-             <div class="col-4">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             A店<br>
-                             <label>￥2000</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-4">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             B店<br>
-                             <label>￥500</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
- 
-             <div class="col-4">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             C店<br>
-                             <label>￥1200</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
- 
-         </div>
- 
-         <h1>新着店舗</h1>
-         <div class="row">
-             <div class="col-3">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             D店<br>
-                             <label>￥55000</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
- 
-             <div class="col-3">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             E店<br>
-                             <label>￥35000</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
- 
-             <div class="col-3">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             D店<br>
-                             <label>￥1000</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
- 
-             <div class="col-3">
-                 <a href="#">
-                     <img src="{{ asset('img/dummy.png') }}" class="img-thumbnail">
-                 </a>
-                 <div class="row">
-                     <div class="col-12">
-                         <p class="samuraimart-product-label mt-2">
-                             E店<br>
-                             <label>￥2000</label>
-                         </p>
-                     </div>
-                 </div>
-             </div>
-         </div>
+        <h1>おすすめ店舗</h1>
+        <div class="row">
+        @foreach($stores as $store)
+            @if($store->recommendation_flg == 1)
+                <div class="col-4">
+                    <a href="{{route('stores.show', $store)}}">
+                        <img src="{{ asset('img/dummy.png')}}" class="img-thumbnail">
+                    </a>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="samuraimart-store-label mt-2">
+                                {{$store->name}}<br>
+                                <label>￥{{$store->price}}</label><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+        </div>
+
+        <h1>新着店舗</h1>
+        <div class="row">
+        @foreach($new_stores as $new_store)
+            @if($store->recommendation_flg == 1)
+                <div class="col-3">
+                    <a href="{{route('stores.show', $new_store)}}">
+                        <img src="{{ asset('img/dummy.png')}}" class="img-thumbnail">
+                    </a>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="samuraimart-store-label mt-2">
+                                {{$new_store->name}}<br>
+                                <label>￥{{$new_store->price}}</label><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+        </div>
      </div>
  </div>
  @endsection
