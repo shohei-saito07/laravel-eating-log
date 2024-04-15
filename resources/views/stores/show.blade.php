@@ -52,7 +52,7 @@
                             予約
                         </button>
                     </div>
-                    @if(Auth::user()->subscription('default')->recurring())
+                    @if(Auth::user()->subscription('default') !== null AND Auth::user()->subscription('default')->recurring())
                     <div class="col-5">
                         @if(Auth::user()->favorite_stores()->where('store_id', $store->id)->exists())
                             <a href="{{ route('favorites.destroy', $store->id) }}" class="btn eating-log-favorite-button text-favorite w-100" onclick="event.preventDefault(); document.getElementById('favorites-destroy-form').submit();">
@@ -109,7 +109,7 @@
                 @endforeach
             </div><br />
             @auth
-            @if(Auth::user()->subscription('default')->recurring())
+            @if(Auth::user()->subscription('default') !== null AND Auth::user()->subscription('default')->recurring())
                 <div class="row">
                     <div class="offset-md-5 col-md-5">
                         <form method="POST" action="{{ route('reviews.store') }}">
