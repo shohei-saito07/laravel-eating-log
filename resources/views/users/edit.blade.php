@@ -102,7 +102,7 @@
                     <label for="subsc-statu" class="text-md-left samuraimart-edit-user-info-label">スタータス</label>
                 </div>
                 <div class="collapse show subsc-statu">
-                    @if($user->subscription('default')->recurring())
+                    @if(Auth::user()->subscription('default')->recurring())
                         有料会員
                     @else
                         無料会員
@@ -110,7 +110,7 @@
                 </div>
             </div>
             
-            @if($user->subscription('default')->recurring())
+            @if(Auth::user()->subscription('default')->recurring())
             <div class="d-flex justify-content-between">
                 <form method="GET" action="{{ route('subscription.cancel') }}" class="w-50">
                     <button type="submit" class="btn btn-danger samuraimart-submit-button mt-3">
