@@ -160,4 +160,12 @@ class StoreController extends Controller
 
         return to_route('stores.index');
     }
+
+    // public function list()
+    // {
+    //     // 店舗取得
+    //     $stores = Store::all();
+
+    //     return view('stores.list', compact('stores'));
+    // }
 }

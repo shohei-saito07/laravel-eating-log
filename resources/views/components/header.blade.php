@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i><label>ユーザ一覧</label></a>
                         </li>
                         <li class="nav-item mr-5">
-                            <a class="nav-link" href="{{ route('stores.create') }}"><i class="fas fa-plus"></i><label>店舗作成</label></a>
+                            <a class="nav-link" href="{{ route('stores.list') }}"><i class="fas fa-plus"></i><label>店舗作成</label></a>
                         </li>
                         <li class="nav-item mr-5">
                             <a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-plus"></i><label>カテゴリ登録・編集</label></a>
