@@ -4,7 +4,7 @@
 <div class="container">
     <h1>店舗情報更新</h1>
 
-    <form action="{{ route('stores.update',$store->id) }}" method="POST">
+    <form action="{{ route('stores.update',$store->id) }}" method="POST" class="mb-3">
         @csrf
         @method('PUT')
         @error('name')
@@ -43,7 +43,17 @@
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-danger">更新</button>
+        <div class="row">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">更新</button>
+            </div>
+        </div>
+    </form>
+
+    <form action="{{ route('stores.destroy', $store) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">削除</button>
     </form>
 
     <a href="{{ route('stores.index') }}">店舗一覧に戻る</a>

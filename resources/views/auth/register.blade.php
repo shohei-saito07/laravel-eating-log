@@ -43,7 +43,7 @@
                     <label for="postal_code" class="col-md-5 col-form-label text-md-left">郵便番号<span class="ml-1 eating-log-require-input-label"><span class="eating-log-require-input-label-text">必須</span></span></label>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control @error('postal_code') is-invalid @enderror eating-log-login-input" name="postal_code" required placeholder="150-0043">
+                        <input type="text" class="form-control @error('postal_code') is-invalid @enderror eating-log-login-input" name="postal_code" value="{{ old('postal_code') }}" required placeholder="150-0043">
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                     <label for="address" class="col-md-5 col-form-label text-md-left">住所<span class="ml-1 eating-log-require-input-label"><span class="eating-log-require-input-label-text">必須</span></span></label>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control @error('address') is-invalid @enderror eating-log-login-input" name="address" required placeholder="東京都渋谷区道玄坂２丁目１１−１">
+                        <input type="text" class="form-control @error('address') is-invalid @enderror eating-log-login-input" name="address" value="{{ old('address') }}" required placeholder="東京都渋谷区道玄坂２丁目１１−１">
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
                     <label for="phone" class="col-md-5 col-form-label text-md-left">電話番号<span class="ml-1 eating-log-require-input-label"><span class="eating-log-require-input-label-text">必須</span></span></label>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror eating-log-login-input" name="phone" required placeholder="03-5790-9039">
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror eating-log-login-input" name="phone" value="{{ old('phone') }}" required placeholder="03-5790-9039">
                     </div>
                 </div>
 

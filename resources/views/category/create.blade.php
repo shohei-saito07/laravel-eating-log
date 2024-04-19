@@ -11,14 +11,14 @@
         @enderror
         <div class="form-group">
             <label for="store-name">カテゴリ</label>
-            <input type="text" name="name" id="store-name" class="form-control" required>
+            <input type="text" name="name" id="store-name" value="{{ old('name') }}" class="form-control" required>
         </div>
         @error('description')
             <strong>詳細を入力してください</strong>
         @enderror
         <div class="form-group">
             <label for="store-description">詳細</label>
-            <textarea name="description" id="store-description" class="form-control"></textarea>
+            <textarea name="description" id="store-description" class="form-control">{{ old('description') }}</textarea>
         </div>
         <button type="submit" class="btn btn-success">登録</button>
     </form>

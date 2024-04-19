@@ -12,7 +12,7 @@
         @enderror
         <div class="form-group">
             <label for="store-name">カテゴリ</label>
-            <input type="text" name="name" id="store-name" class="form-control" value="{{ $major_category->name }}">
+            <input type="text" name="name" id="store-name" class="form-control" value="{{ $major_category->name }}" >
         </div>
         @error('description')
             <strong>詳細を入力してください</strong>
