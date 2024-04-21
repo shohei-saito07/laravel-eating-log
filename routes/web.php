@@ -92,5 +92,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('tempsubscription/update', 'update')->name('subscription.update');
         Route::delete('tempsubscription/delete', 'destroy')->name('subscription.destroy');
     });
-    // Route::resource('subscription', SubscriptionController::class);
 });
