@@ -49,6 +49,8 @@ class ReservationController extends Controller
         $reservation->date = $request->input('reservation_date');
         $reservation->store_id = $request->input('id');
         $reservation->save();
+        
+        session()->flash('success', '店舗を予約しました。');
     
         return redirect()->route('reservation.index');
     }
@@ -56,6 +58,7 @@ class ReservationController extends Controller
     public function destroy($reservation_id)
     {
         Reservation::destroy($reservation_id);
+        session()->flash('success', '予約をキャンセルしました。');
         return redirect()->route('reservation.index');
     }
 }

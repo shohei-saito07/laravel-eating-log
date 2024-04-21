@@ -60,6 +60,9 @@ class BasicInfoController extends Controller
         $basicInfo->email_address = $request->input('email_address');
 
         $basicInfo->update();
+
+        // フラッシュメッセージを設定
+        session()->flash('success', '基本情報を更新しました。');
         
         return redirect()->route('basicInfo.show', $basicInfo->id);
     }

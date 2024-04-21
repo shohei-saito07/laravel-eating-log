@@ -79,13 +79,14 @@ class StoreController extends Controller
         $store->price = $request->input('price');
         $store->category_id = $request->input('category_id');
 
-        if ($request->file('image') != null)
-        {
+        if ($request->file('image') != null) {
             $path = $request->file('image')->store('image');
             $store->image = $request->input($path);
         }
 
         $store->recommendation_flg = $request->has('recommendation_flg') ? 1 : 0;
+
+        session()->flash('success', '店舗を作成しました。');
         $store->save();
 
         return to_route('stores.index');
@@ -144,6 +145,8 @@ class StoreController extends Controller
         $store->category_id = $request->input('category_id');
         $store->update();
 
+        session()->flash('success', '店舗を更新しました。');
+
         return to_route('stores.index');
     }
 
@@ -157,6 +160,9 @@ class StoreController extends Controller
     {
         // 店舗情報を削除
         $store->delete();
+
+        // フラッシュメッセージを設定
+        session()->flash('success', '店舗「' . $store->name . '」が削除しました。');
 
         return to_route('stores.index');
     }

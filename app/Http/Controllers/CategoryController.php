@@ -61,6 +61,9 @@ class CategoryController extends Controller
         $store->description = $request->input('description');
         $store->save();
 
+        // フラッシュメッセージを設定
+        session()->flash('success', 'カテゴリを作成されしました。');
+
         // カテゴリ作成画面へ遷移する
         return to_route('stores.index');
     }
@@ -105,8 +108,11 @@ class CategoryController extends Controller
         // カテゴリを更新
         $category->update($validatedData);
 
+        // フラッシュメッセージを設定
+        session()->flash('success', 'カテゴリを更新しました。');
+
         // 更新が成功した場合の処理
-        return redirect()->route('category.index')->with('success', 'カテゴリが更新されました。');
+        return redirect()->route('category.index')->with('success', 'カテゴリが更新しました。');
     }
 
     /**
@@ -121,8 +127,11 @@ class CategoryController extends Controller
         $category = MajorCategory::findOrFail($id);
         $category->delete();
 
+        // フラッシュメッセージを設定
+        session()->flash('success', 'カテゴリを更新されしました。');
+
         // 削除が成功した場合の処理
-        return redirect()->route('category.index')->with('success', 'カテゴリが削除されました。');
+        return redirect()->route('category.index');
 
     }
 }

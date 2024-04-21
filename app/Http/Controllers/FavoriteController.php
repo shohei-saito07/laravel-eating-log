@@ -15,14 +15,16 @@ class FavoriteController extends Controller
 
     public function store($store_id)
     {
+        
         Auth::user()->favorite_stores()->attach($store_id);
-
+        session()->flash('success', 'お気に入りに追加しました。');
         return back();
     }
 
     public function destroy($store_id)
     {
         Auth::user()->favorite_stores()->detach($store_id);
+        session()->flash('success', 'お気に入りを解除しました。');
 
         return back();
     }

@@ -31,6 +31,9 @@ class SubscriptionController extends Controller
         // サブスクリプションの登録
         $request->user()->newSubscription('default', 'price_1OsixTIXY7oQnFsvy1gLI5HG')->create($request->paymentMethodId);
 
+        // フラッシュメッセージを設定
+        session()->flash('success', 'サブスクリプションを登録しました。');
+
         // マイページにリダイレクト
         return redirect()->route('mypage');
     }
@@ -48,10 +51,9 @@ class SubscriptionController extends Controller
 
         // クレジットカード情報
         $intent = Auth::user()->createSetupIntent();
-        Log::error($intent);
 
         // クレジットカード編集画面へ遷移
-        return view('subscription.edit', compact('user','intent'));
+        return view('subscription.edit', compact('user', 'intent'));
     }
 
     /**
@@ -71,7 +73,10 @@ class SubscriptionController extends Controller
 
         // デフォルトの支払いを変更
         Auth::user()->updateDefaultPaymentMethod($request->paymentMethodId);
- 
+
+         // フラッシュメッセージを設定
+         session()->flash('success', '支払いのクレジットカードを変更しました。');
+
         // マイページにリダイレクト
         return redirect()->route('mypage');
     }
@@ -84,6 +89,9 @@ class SubscriptionController extends Controller
      */
     public function destroy()
     {
+        // フラッシュメッセージを設定
+        session()->flash('success', 'サブスクリプションをキャンセルしました。');
+
         Auth::user()->subscription('default')->cancel();
         return redirect()->route('mypage');
     }
@@ -92,6 +100,5 @@ class SubscriptionController extends Controller
     {
         // サブスクリプション削除画面へ遷移
         return view('subscription.cancel');
-        
     }
 }
