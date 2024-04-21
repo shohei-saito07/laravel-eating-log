@@ -112,7 +112,7 @@ class CategoryController extends Controller
         session()->flash('success', 'カテゴリを更新しました。');
 
         // 更新が成功した場合の処理
-        return redirect()->route('category.index')->with('success', 'カテゴリが更新しました。');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -128,7 +128,7 @@ class CategoryController extends Controller
         $category->delete();
 
         // フラッシュメッセージを設定
-        session()->flash('success', 'カテゴリを更新されしました。');
+        session()->flash('success', 'カテゴリを更新しました。');
 
         // 削除が成功した場合の処理
         return redirect()->route('category.index');

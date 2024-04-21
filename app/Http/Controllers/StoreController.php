@@ -162,7 +162,7 @@ class StoreController extends Controller
         $store->delete();
 
         // フラッシュメッセージを設定
-        session()->flash('success', '店舗「' . $store->name . '」が削除しました。');
+        session()->flash('success', '店舗「' . $store->name . '」を削除しました。');
 
         return to_route('stores.index');
     }
